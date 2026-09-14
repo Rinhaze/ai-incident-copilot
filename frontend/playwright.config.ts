@@ -1,0 +1,3 @@
+import{defineConfig}from'@playwright/test';import{mkdirSync}from'node:fs';import{dirname,resolve}from'node:path';import{fileURLToPath}from'node:url';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),state=resolve(root,'.e2e-state');mkdirSync(state,{recursive:true});process.env.E2E_ROOT=root;process.env.E2E_STATE=state;process.env.E2E_API_URL='http://127.0.0.1:8000';
+export default defineConfig({testDir:'e2e',fullyParallel:false,globalSetup:'./e2e/global-setup.ts',globalTeardown:'./e2e/global-teardown.ts',use:{baseURL:'http://127.0.0.1:5173',channel:'msedge',trace:'retain-on-failure'},reporter:'list'})
